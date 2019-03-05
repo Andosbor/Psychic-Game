@@ -8,11 +8,11 @@
 //making an array filled with every letter in the alphabet
 var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 
-var guesses = 9
+var guesses = 10
 
-var w;
+var w = 0;
 
-var l;
+var l = 0;
 
 var g;
 
@@ -32,38 +32,48 @@ console.log("COMPUTERGUESS: " + computerGuess);
 //function that says when a key is lifted up, enter that letter into the function
 document.onkeyup = function(event){
 
-//Shows what guesses have been made
-    document.getElementById("shownGuess").innerHTML++;
 
 //determines which key is being pressed
     var userGuess = event.key;
     console.log("COMPUTERGUESS: " + computerGuess);
     console.log("USERGUESS: " + userGuess);
 
+//Shows what guesses have been made
+document.getElementById("shownGuess").innerHTML += userGuess + ", ";
+
     
 //If wrong guess, lose one try. (need to figure out how to reset after 0 lives)
 
 if (userGuess !== computerGuess){
-    document.getElementById("guesses").innerHTML--;
+    guesses--;
+    document.getElementById("guesses").innerHTML = guesses;
     console.log("wrong");
+    
 } 
     
-
- //if correct guess, add one to win and reset game. (need to figure out how to reset Guesses Left, computerGuess, and Your Guesses so far)
+//userGuess += the string(for displaying keys pressed)
+ //if correct guess, add one to win and reset game. (need to figure out how to reset Your Guesses so far)
     if (userGuess === computerGuess){
-        document.getElementById("wins").innerHTML++;
+        w++;
+        document.getElementById("wins").innerHTML = w;
         console.log("correct");
         computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
-        document.getElementById("guesses").innerHTML = 9;
+        document.getElementById("guesses").innerHTML = 10;
+        guesses = 10;
+        document.getElementById("shownGuess").innerHTML = " ";
+        userGuess = 0;
     }
-
-//find out how to increase win number on document when user wins each time**
     
 
-
+//increase loss number (reset Your Guesses so far)
     if (guesses === 0){
         document.getElementById("losses").innerHTML++;
         console.log("no more guesses");
+        computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+        document.getElementById("guesses").innerHTML = 10;
+        guesses = 10;
+        document.getElementById("shownGuess").innerHTML = " ";
+        userGuess = 0;
     }
 
         
@@ -71,17 +81,10 @@ if (userGuess !== computerGuess){
     }
 
 
-      //If lives are <1, add a loss and reset game
-
-//determines if user's key press matches computer's choice
-
 //lets the user have 10 guesses
 
 //shows the user what options they have chosen
 
-
 //reset the game
 
-//place a win
 
-//place a loss
